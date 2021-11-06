@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::resource('v1/jenis', JenisBarangController::class);
 Route::resource('v1/barang', BarangController::class);
 Route::resource('v1/transaksi', TransaksiController::class);
+Route::get('v1/transaksis/detail',[TransaksiController::class,"transaksis"]);

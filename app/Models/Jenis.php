@@ -10,4 +10,9 @@ class Jenis extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function transaksis()
+    {
+        return $this->hasManyThrough(Transaksi::class, Barang::class);
+    }
+
 }
