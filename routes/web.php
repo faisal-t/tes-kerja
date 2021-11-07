@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Web\BarangController;
+use App\Http\Controllers\Web\JenisBarangController;
+use App\Http\Controllers\Web\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get("/",[JenisBarangController::class,"index"]);
+Route::prefix("admin")->name("admin.")->group( function(){
+    Route::resource('jenis', JenisBarangController::class);
+    Route::resource('barang', BarangController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::get('transaksis/detail',[TransaksiController::class,"transaksis"]);
 });
