@@ -27,10 +27,8 @@ class TransaksiController extends Controller
             ->with('barang')
             ->get();
 
-        return response([
-            'message' => 'success',
-            'data' => $data,
-        ]);
+        $barang = Barang::all();    
+        return view('admin.transaksi.index',compact(['data','barang']));
     }
 
     /**

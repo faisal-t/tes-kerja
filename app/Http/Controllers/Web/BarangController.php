@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\Jenis;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -11,10 +12,8 @@ class BarangController extends Controller
     public function index()
     {
         $data = Barang::with("jenis")->get();
-        return response([
-            'message' => 'success',
-            'data' => $data,
-        ]);
+        $jenis = Jenis::all();
+        return view('admin.barang.index',compact(['data','jenis']));
     }
 
     /**
@@ -43,10 +42,7 @@ class BarangController extends Controller
 
         Barang::create($data);
 
-        return response([
-            'message' => 'barang berhasil dibuat',
-            'data' => $data,
-        ]);
+        return back()->with('status', 'Berhasil Tambah Barang');
     }
 
     /**
@@ -87,10 +83,7 @@ class BarangController extends Controller
         ]);
 
         $barang->update($data);
-        return response([
-            'message' => 'barang berhasil diupdate',
-            'data' => $data,
-        ]);
+        return back()->with('status', 'Berhasil Edit Barang');
     }
 
     /**
@@ -102,8 +95,6 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         $barang->delete();
-        return response([
-            'message' => 'barang berhasil dihapus'
-        ]);
+        return back()->with('status', 'Berhasil Hapus Barang');
     }
 }

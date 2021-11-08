@@ -50,8 +50,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-    $('#example').DataTable();
-} );
+	$(function() {
+		$.extend( $.fn.dataTable.defaults, {
+		    responsive: true,
+		} );
+	})
 </script>
 @endpush
