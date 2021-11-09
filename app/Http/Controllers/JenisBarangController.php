@@ -111,9 +111,9 @@ class JenisBarangController extends Controller
      * @param  \App\Models\Jenis  $jenis
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jenis $barang)
+    public function destroy(Jenis $jeni)
     {
-        $barang->delete();
+        $jeni->delete();
         return response([
             'message' => 'jenis barang berhasil dihapus',
         ]);

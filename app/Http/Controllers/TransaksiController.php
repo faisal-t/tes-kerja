@@ -19,14 +19,14 @@ class TransaksiController extends Controller
         $data = Transaksi::query()
             ->select('transaksis.*')
             ->join('barangs', 'barang_id', 'barangs.id')
-            ->when($request->has('tanggal_transaksi'), fn ($query) => $query->where('updated_at', 'like', '%' . $request->tanggal_transaksi . '%'))
+            ->when($request->has('tanggal_transaksi'), fn ($query) => $query->where('transaksis.updated_at', 'like', '%' . $request->tanggal_transaksi . '%'))
             ->when($request->has('nama_barang'), fn ($query) => $query->where('barangs.name', 'like', '%' . $request->nama_barang . '%'))
             ->when($request->has('order_nama'), fn ($query) => $query->orderBy('barangs.name', $request->order_nama))
             ->when($request->has('order_tanggal'), fn ($query) => $query->orderBy('updated_at', $request->order_tanggal))
             ->with('barang')
             ->get();
 
-        return response([
+        return response([   
             'message' => 'success',
             'data' => $data,
         ]);
@@ -156,7 +156,7 @@ class TransaksiController extends Controller
                 request()->has('from', 'to'),
                 fn ($query) =>
                 $query->whereBetween('updated_at', [request('from'), \Date::createFromFormat('Y-m-d', request('to'))])
-            )->dd();
+            )->get();
 
         return response($data);
     }

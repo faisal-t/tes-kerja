@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-       /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,8 +27,8 @@ class TransaksiController extends Controller
             ->with('barang')
             ->get();
 
-        $barang = Barang::all();    
-        return view('admin.transaksi.index',compact(['data','barang']));
+        $barang = Barang::all();
+        return view('admin.transaksi.index', compact(['data', 'barang']));
     }
 
     /**
@@ -64,17 +64,10 @@ class TransaksiController extends Controller
             $data['stok'] = $barang->stok;
             $barang->update(['stok' => $stok]);
             Transaksi::create($data);
+            return back()->with('status', 'Berhasil Tambah Transaksi');
         } else {
-            return response([
-                'message' => 'transaksi gagal dikarenakan stok tidak cukup',
-            ]);
+            return back()->with('status', 'Gagal Stok Barang Tidak Cukup');
         }
-
-
-        return response([
-            'message' => 'transaksi berhasil dibuat',
-            'data' => $data,
-        ]);
     }
 
     /**
@@ -142,10 +135,12 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        $transaksi->delete();
-        return response([
-            'message' => 'transaksi berhasil dihapus'
-        ]);
+        try {
+            $transaksi->delete();
+            return back()->with('status', 'Berhasil Hapus Transaksi');
+        } catch (\Exception $e) {
+            return back()->with('status', 'Gagal hapus Jenis Barang Karena sudah memiliki relasi');
+        }
     }
 
     public function transaksis(Request $request)

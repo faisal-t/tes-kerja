@@ -16,12 +16,12 @@
 
                         <div class="form-group">
                             <label class="font-weight-bold">Terjual <span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="terjual" class="form-control" required>
                         </div>
 
                         <div class="form-group">
                             <label class="font-weight-bold">Barang <span class="text-danger">*</span></label>
-                            <select class="form-control" id="jenisbarang" name="barang_id">
+                            <select class="form-control" name="barang_id">
                                 @foreach ($barang as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach

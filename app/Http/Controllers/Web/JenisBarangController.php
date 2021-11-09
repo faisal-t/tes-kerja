@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class JenisBarangController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -17,8 +17,8 @@ class JenisBarangController extends Controller
     public function index()
     {
         $data = Jenis::query()->get();
-      
-        return view('admin.jenis.index',compact(['data']));
+
+        return view('admin.jenis.index', compact(['data']));
     }
 
     /**
@@ -102,7 +102,11 @@ class JenisBarangController extends Controller
      */
     public function destroy(Jenis $jeni)
     {
-        $jeni->delete();
-        return back()->with('status', 'Berhasil Hapus Jenis Barang');
+        try {
+            $jeni->delete();
+            return back()->with('status', 'Berhasil Hapus Jenis Barang');
+        } catch (\Exception $e) {
+            return back()->with('status', 'Gagal hapus Jenis Barang Karena sudah memiliki relasi');
+        }
     }
 }

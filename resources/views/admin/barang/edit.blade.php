@@ -1,6 +1,6 @@
-<form id="modal-create" class="modal fade" method="post" autocomplete="off">
+<form id="modal-edit" class="modal fade" method="post" autocomplete="off">
 	@csrf
-
+	@method('put')
 	<div class="modal-dialog" style="min-width: 80%">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -47,7 +47,7 @@
 @push('js')
 <script type="text/javascript">
 	function edit(id) {
-		let url_target = `{{ url('admin/jenis') }}/${id}`;
+		let url_target = `{{ url('admin/barang') }}/${id}`;
 		$.getJSON(url_target, function(data) {
 			$("#modal-edit").find("input").val(function(index, value) {
 				return ['_method', '_token'].includes(this.name) ? value : (data[this.name]);

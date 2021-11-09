@@ -38,7 +38,7 @@
                             <td>{{$item->jenis->name}}</td>
                             <td>{{$item->stok}}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary mb-1" onclick="edit(15)">
+                                <button class="btn btn-sm btn-primary mb-1" onclick="edit({{$item->id}})">
                                     <i class="fas fa-fw fa-book"></i>
                                     Edit
                                 </button>
@@ -47,7 +47,7 @@
                                     <form action="{{route('admin.barang.destroy',$item->id)}}" method="post" id="form-delete-$id" onsubmit="return confirm("Yakin ingin dihapus?")">
                                         @csrf
                                         @method('delete')
-                                        <button class="d-inline-block btn btn-sm btn-danger mb-1" type="submit" onclick="confirm">
+                                        <button class="d-inline-block btn btn-sm btn-danger mb-1" type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus Barang?');">
                                             <i class="fas fa-fw fa-trash"></i>
                                             Hapus
                                         </button>

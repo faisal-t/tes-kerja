@@ -40,7 +40,7 @@
                                 </button>
                                
                                 <div class="d-inline-block">
-                                    <form action="{{route('admin.jenis.destroy',$item->id)}}" method="post" id="form-delete-$id" onsubmit="return confirm("Yakin ingin dihapus?")">
+                                    <form action="{{route('admin.jenis.destroy',$item->id)}}" method="post" id="form-delete-$id" onclick="return confirm('Apakah anda yakin ingin menghapus Jenis Barang?');">
                                         @csrf
                                         @method('delete')
                                         <button class="d-inline-block btn btn-sm btn-danger mb-1" type="submit" onclick="confirm">

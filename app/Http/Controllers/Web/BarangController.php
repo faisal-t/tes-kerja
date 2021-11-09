@@ -94,7 +94,12 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        $barang->delete();
-        return back()->with('status', 'Berhasil Hapus Barang');
+        try{
+            $barang->delete();
+            return back()->with('status', 'Berhasil Hapus Barang');
+        }catch (\Exception $e) {
+            return back()->with('status', 'Gagal hapus Barang Karena sudah memiliki relasi');
+        }
+       
     }
 }
