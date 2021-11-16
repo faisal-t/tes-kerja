@@ -105,7 +105,7 @@ class JenisBarangController extends Controller
         try {
             $jeni->delete();
             return back()->with('status', 'Berhasil Hapus Jenis Barang');
-        } catch (\Exception $e) {
+        }catch (\Exception $e) {
             return back()->with('status', 'Gagal hapus Jenis Barang Karena sudah memiliki relasi');
         }
     }

@@ -114,17 +114,12 @@ class TransaksiController extends Controller
             $data['stok'] = $stok;
             $barang->update(['stok' => $stok]);
             $transaksi->update($data);
+            return back()->with('status', 'Berhasil Edit Transaksi');
         } else {
             return response([
                 'message' => 'transaksi gagal dikarenakan stok tidak cukup',
             ]);
         }
-
-
-        return response([
-            'message' => 'transaksi berhasil dibuat',
-            'data' => $data,
-        ]);
     }
 
     /**
@@ -136,6 +131,9 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         try {
+            $barang = Barang::where('id', $transaksi->barang_id)->first();
+            $stok = $barang->stok +  $transaksi->terjual;
+            $barang->update(['stok' => $stok]);
             $transaksi->delete();
             return back()->with('status', 'Berhasil Hapus Transaksi');
         } catch (\Exception $e) {
@@ -150,8 +148,8 @@ class TransaksiController extends Controller
                 request()->has('from', 'to'),
                 fn ($query) =>
                 $query->whereBetween('updated_at', [request('from'), \Date::createFromFormat('Y-m-d', request('to'))])
-            )->dd();
+            )->get();
 
-        return response($data);
+        return view('admin.transaksi.detail_transaksi', compact(['data']));
     }
 }

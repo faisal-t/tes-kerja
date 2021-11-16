@@ -29,10 +29,17 @@
 		<span>Keloa Barang</span>
 	</a>
 </li>
-<li class="nav-item {{ request()->routeIs('admin.transaksi.*') ? 'active' : '' }}">
+
+<li class="nav-item {{ request()->routeIs('admin.transaksi.index') ? 'active' : '' }}">
 	<a class="nav-link" href="{{ route('admin.transaksi.index') }}">
 		<i class="fas fa-fw fa-book"></i>
 		<span>Keloa Transaksi</span>
+	</a>
+</li>
+<li class="nav-item {{ request()->routeIs('admin.transaksi.detail') ? 'active' : '' }}">
+	<a class="nav-link" href="{{ route('admin.transaksi.detail') }}">
+		<i class="fas fa-fw fa-book"></i>
+		<span>Keloa Detail Penjualan</span>
 	</a>
 </li>
 

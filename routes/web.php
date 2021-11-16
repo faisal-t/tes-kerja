@@ -21,5 +21,5 @@ Route::prefix("admin")->name("admin.")->group( function(){
     Route::resource('jenis', JenisBarangController::class);
     Route::resource('barang', BarangController::class);
     Route::resource('transaksi', TransaksiController::class);
-    Route::get('transaksis/detail',[TransaksiController::class,"transaksis"]);
+    Route::get('transaksis/detail',[TransaksiController::class,"transaksis"])->name('transaksi.detail');
 });
